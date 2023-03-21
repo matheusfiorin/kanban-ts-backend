@@ -6,7 +6,6 @@ export default function loggerMiddleware(req: Request, res: Response, next: Next
     const id = req.path.split('/')[2];
     const { titulo } = req.body;
 
-    // tslint:disable-next-line:no-console
     console.info(`${dateTime} - Card ${id} - ${titulo} - ${req.method === 'PUT' ? 'Alterar' : 'Remover'}`);
   }
 

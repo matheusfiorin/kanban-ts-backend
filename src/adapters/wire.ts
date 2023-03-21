@@ -1,4 +1,4 @@
-import { Card, CardWire } from "../models/card";
+import { Card, CardWire } from '../models/card';
 
 export function wireToDomain(wire: CardWire): Card {
   return {

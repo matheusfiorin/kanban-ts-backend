@@ -31,7 +31,7 @@ export class Database {
     return new Promise((resolve, reject) => {
       const id = uuidv4();
       const { title, content, list } = card;
-      const query = `INSERT INTO cards (id, title, content, list) VALUES (?, ?, ?, ?)`;
+      const query = 'INSERT INTO cards (id, title, content, list) VALUES (?, ?, ?, ?)';
       this.db.run(query, [id, title, content, list], (err) => {
         if (err) {
           reject(err);
@@ -44,7 +44,7 @@ export class Database {
 
   static readCards(): Promise<Card[]> {
     return new Promise((resolve, reject) => {
-      const query = `SELECT * FROM cards`;
+      const query = 'SELECT * FROM cards';
       this.db.all<Card>(query, [], (err, card) => {
         if (err) {
           reject(err);
@@ -60,7 +60,7 @@ export class Database {
   static updateCard(id: string, card: Partial<Card>): Promise<Card> {
     return new Promise((resolve, reject) => {
       const { title, content, list } = card;
-      const query = `UPDATE cards SET title = ?, content = ?, list = ? WHERE id = ?`;
+      const query = 'UPDATE cards SET title = ?, content = ?, list = ? WHERE id = ?';
       this.db.run(query, [title, content, list, id], function (err) {
         if (err) {
           reject(err);
@@ -75,7 +75,7 @@ export class Database {
 
   static deleteCard(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      const query = `DELETE FROM cards WHERE id = ?`;
+      const query = 'DELETE FROM cards WHERE id = ?';
       this.db.run(query, [id], function (err) {
         if (err) {
           reject(err);
