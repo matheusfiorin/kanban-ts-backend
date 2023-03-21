@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application, Router } from 'express';
 import { Database } from './controllers/database';
-import { exceptionMiddleware } from './exceptions/middleware';
+import { exceptionMiddleware } from './middlewares/middleware';
 import loggerMiddleware from './middlewares/logger';
 
 class App {
