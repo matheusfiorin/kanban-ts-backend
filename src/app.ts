@@ -25,7 +25,6 @@ class App {
 
   public listen() {
     this.app.listen(this.port, () => {
-      // tslint:disable-next-line:no-console
       console.info(`⚡️ Server is running at http://localhost:${this.port}`);
     });
   }

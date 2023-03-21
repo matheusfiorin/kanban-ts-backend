@@ -1,4 +1,4 @@
-import { NextFunction } from "express";
+import { NextFunction } from 'express';
 import Exception from './exception';
 
 export class ExceptionHandler {
