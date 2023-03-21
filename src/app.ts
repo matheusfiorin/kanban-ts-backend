@@ -15,7 +15,7 @@ class App {
     dotenv.config();
 
     this.app = express();
-    this.port = process.env.PORT || '666';
+    this.port = process.env.PORT || '5000';
 
     this.initializeExpress();
     this.initializeDatabase();
