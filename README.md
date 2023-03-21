@@ -10,7 +10,23 @@ Create a file at the rootdir called `.env`, following the content inside `.env.e
 
 ### Building and running the application
 
-In order to build the application, first install all the dependencies:
+#### With Docker
+
+In order to start the application with docker, you must first build the image:
+
+```console
+$ docker build -t kanban-ts-backend .
+```
+
+Then, run it with:
+
+```console
+docker run -p 5000:5000 kanban-ts-backend
+```
+
+#### Manually
+
+In order to manually build the application, first install all the dependencies:
 
 ```console
 $ npm install
@@ -25,7 +41,7 @@ $ npm run build
 This will generate the `.js` files inside `dist/` directory. From this point you should be able to run the API by doing:
 
 ```console
-$ npm run start
+$ npm start
 ```
 
 > Note that you could also use `npm run dev` to start a development environment that reloads everytime you update a file.
