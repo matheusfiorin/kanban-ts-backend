@@ -23,7 +23,7 @@ cardRouter.post('/cards', authMiddleware, schemaMiddleware, async (req: Request,
   try {
     const createdCard = await Database.createCard(req.body as Card);
 
-    res.status(201).json(createdCard);
+    res.status(201).json(domainToWire(createdCard));
   } catch (err) {
     return ExceptionHandler.internalServerError(next);
   }
@@ -34,7 +34,7 @@ cardRouter.put('/cards/:id', authMiddleware, schemaMiddleware, async (req: Reque
     const { id } = req.params;
     const updatedCard = await Database.updateCard(id, req.body as Card);
 
-    res.json(updatedCard);
+    res.json(domainToWire(updatedCard));
   } catch (err) {
     if (err instanceof Exception) {
       return next(err);
@@ -49,7 +49,7 @@ cardRouter.delete('/cards/:id', authMiddleware, async (req: Request, res: Respon
 
     await Database.deleteCard(id);
 
-    const cards = await Database.readCards();
+    const cards = (await Database.readCards()).map((e) => domainToWire(e));
 
     res.json(cards);
   } catch (err) {
