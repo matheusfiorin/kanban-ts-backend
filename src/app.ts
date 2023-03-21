@@ -3,18 +3,19 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Application, Router } from 'express';
 import { Database } from './controllers/database';
-import { exceptionMiddleware } from './exceptions/middleware';
+import { exceptionMiddleware } from './middlewares/exception';
 import loggerMiddleware from './middlewares/logger';
 
 class App {
   public app: Application;
+  private server;
   private port: string;
 
   constructor(routers: Router[]) {
     dotenv.config();
 
     this.app = express();
-    this.port = process.env.PORT || '666';
+    this.port = process.env.PORT || '5000';
 
     this.initializeExpress();
     this.initializeDatabase();
@@ -24,9 +25,13 @@ class App {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
+    this.server = this.app.listen(this.port, () => {
       console.info(`⚡️ Server is running at http://localhost:${this.port}`);
     });
+  }
+
+  public close() {
+    this.server.close();
   }
 
   private initializeExpress() {
