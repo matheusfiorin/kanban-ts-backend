@@ -1,10 +1,10 @@
 # Kanban TypeScript | Backend
 
-> In order to see a portuguese version of this README, [click here]().
+> 🇧🇷 In order to see a portuguese version of this README, [click here](https://github.com/matheusfiorin/kanban-ts-backend/blob/master/docs/README_pt-BR.md).
 
 ## Setup
 
-### Dotenv file
+### Dotenv file | ⚠️ IMPORTANT ⚠️
 
 Create a file at the rootdir called `.env`, following the content inside `.env.example`. You can tweak the `JWT_SECRET` and the `PORT` variable, and the `ADMIN_USER` and `ADMIN_PASS` corresponds to the challenge prerequisites.
 
@@ -82,6 +82,22 @@ I chose to do this project with a Model-View-Controller (MVC) architecture with 
 4. **Flexibility**: MVC architecture allows for a high degree of flexibility in terms of technologies and frameworks used.
 
 5. **Easy Debugging and Exception Handling**: The clear separation of concerns and modularity of MVC make it easier to debug and handle exceptions, pinpoint errors and resolve them quickly.
+
+#### Folder structure explanation
+
+I've chosen to do the `adapters` with a simple logic that transforms the outer request/response in a entity that the application really knows. In this case, I didn't like to mix the Portuguese of the requirements (`titulo`, `conteudo` and `lista`) together with the english variables and functions.
+
+The database controller uses `Promises` to manipulate the card entity, and also could function easily in a local db instead of in-memory because of the `start(path?: string)` method.
+
+I separated the `exceptions` system in their own folder, so it could be shared accross the application and extensible.
+
+The `middlewares` are separated by responsibility.
+
+The `models` folder contains just the Card interfaces, representing the outer world and the business domain logic.
+
+The `routes` folder contains just the routers and some logic. I've chosen to not do a controller for the `authRouter` because it's a simple file, and likely to not be extended.
+
+I've also separated the `App` concept from the `server`.
 
 ### Dependencies
 
