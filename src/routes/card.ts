@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { domainToWire } from '../adapters/wire';
 import { Database } from '../controllers/database';
+import Exception from '../exceptions/exception';
 import { ExceptionHandler } from '../exceptions/handler';
 import { authMiddleware } from '../middlewares/auth';
 import schemaMiddleware from '../middlewares/schema';
@@ -34,7 +35,10 @@ cardRouter.put('/cards/:id', authMiddleware, schemaMiddleware, async (req: Reque
     const updatedCard = await Database.updateCard(id, req.body as Card);
 
     res.json(updatedCard);
-  } catch (_) {
+  } catch (err) {
+    if (err instanceof Exception) {
+      return next(err);
+    }
     return ExceptionHandler.internalServerError(next);
   }
 });
@@ -48,7 +52,10 @@ cardRouter.delete('/cards/:id', authMiddleware, async (req: Request, res: Respon
     const cards = await Database.readCards();
 
     res.json(cards);
-  } catch (_) {
+  } catch (err) {
+    if (err instanceof Exception) {
+      return next(err);
+    }
     return ExceptionHandler.internalServerError(next);
   }
 });

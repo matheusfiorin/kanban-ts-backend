@@ -1,5 +1,6 @@
 import sqlite3 from 'sqlite3';
 import { v4 as uuidv4 } from 'uuid';
+import { ExceptionHandler } from '../exceptions/handler';
 import { Card } from '../models/card';
 
 export class Database {
@@ -64,7 +65,7 @@ export class Database {
         if (err) {
           reject(err);
         } else if (this.changes === 0) {
-          reject(new Error(`Card with ID ${id} not found`));
+          reject(ExceptionHandler.createException(404, 'Not found.'));
         } else {
           resolve({ id, title: title || '', content: content || '', list: list || '' });
         }
@@ -79,7 +80,7 @@ export class Database {
         if (err) {
           reject(err);
         } else if (this.changes === 0) {
-          reject(new Error(`Card with ID ${id} not found`));
+          reject(ExceptionHandler.createException(404, 'Not found.'));
         } else {
           resolve();
         }
